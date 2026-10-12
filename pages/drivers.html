@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رانندگان | بارز پخش</title>
+  
+  
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/drivers.css">
+</head>
+<body>
+
+
+<div class="loading-overlay" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-logo">
+      <i class="bi bi-truck"></i>
+    </div>
+    <div class="loader-text">
+      در حال بارگذاری
+      <span>.</span><span>.</span><span>.</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="driverModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="driverModalTitle">
+        <i class="bi bi-plus-circle"></i> افزودن راننده جدید
+      </h3>
+      <button class="modal-close" id="closeDriverModal">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <form id="driverForm">
+        <div class="form-grid" style="grid-template-columns: repeat(2, 1fr);">
+          
+          <div class="form-group">
+            <label>نام و نام خانوادگی</label>
+            <input type="text" class="form-control" id="drvName" placeholder="مثال: ابوذر دهقان اناری" required>
+          </div>
+
+          <div class="form-group">
+            <label>شماره موبایل</label>
+            <input type="text" class="form-control" id="drvPhone" placeholder="0912xxxxxxx">
+          </div>
+
+          <div class="form-group">
+            <label>پلاک خودرو</label>
+            <input type="text" class="form-control" id="drvPlate" placeholder="۶۵ ایران ۴۶۳ ع ۹۶">
+          </div>
+
+          <div class="form-group">
+            <label>وضعیت</label>
+            <select class="form-control" id="drvStatus" required>
+              <option value="active">فعال</option>
+              <option value="inactive">غیرفعال</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>تعداد پخش (اولیه)</label>
+            <input type="number" class="form-control" id="drvDeliveries" min="0" value="0">
+          </div>
+
+          <div class="form-group">
+            <label>مسافت طی‌شده (km)</label>
+            <input type="number" class="form-control" id="drvDistance" min="0" value="0">
+          </div>
+
+          <div class="form-group">
+            <label>تعداد مشتری</label>
+            <input type="number" class="form-control" id="drvCustomers" min="0" value="0">
+          </div>
+
+        </div>
+
+        <div class="form-actions" style="margin-top: 12px;">
+          <button type="button" class="btn btn-secondary" id="cancelDriverModal">انصراف</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-lg"></i>
+            ذخیره
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app">
+  
+    <aside class="sidebar">
+     <div class="sidebar-header">
+  <div class="logo">
+
+    <img
+      class="logo__img logo__img--full"
+      src="../assets/logo/barez-phakhsh-logi.png"
+      alt="بارز پخش"
+    >
+
+    <img
+      class="logo__img logo__img--mini"
+      src="../assets/logo/mini-logo.png"
+      alt="بارز پخش"
+    >
+  </div>
+  <div class="sidebar-toggle" id="sidebarToggle">
+    <i class="bi bi-list"></i>
+  </div>
+</div>
+
+      <nav class="sidebar-nav">
+        <a href="../index.html" class="nav-item">
+          <i class="bi bi-grid-1x2"></i>
+          <span>داشبورد</span>
+        </a>
+        <a href="daily-records.html" class="nav-item">
+          <i class="bi bi-calendar-check"></i>
+          <span>ثبت روزانه</span>
+        </a>
+        <a href="drivers.html" class="nav-item active">
+          <i class="bi bi-people"></i>
+          <span>رانندگان</span>
+        </a>
+        <a href="vehicles.html" class="nav-item">
+          <i class="bi bi-truck"></i>
+          <span>خودروها</span>
+        </a>
+        <a href="expenses.html" class="nav-item">
+          <i class="bi bi-wallet2"></i>
+          <span>هزینه‌ها</span>
+        </a>
+        <a href="repairs.html" class="nav-item">
+          <i class="bi bi-tools"></i>
+          <span>تعمیرات</span>
+        </a>
+        <a href="insurance.html" class="nav-item">
+          <i class="bi bi-shield-check"></i>
+          <span>بیمه</span>
+        </a>
+        <a href="loans.html" class="nav-item">
+          <i class="bi bi-credit-card"></i>
+          <span>وام‌ها</span>
+        </a>
+        <a href="payroll.html" class="nav-item">
+          <i class="bi bi-cash-stack"></i>
+          <span>حقوق و دستمزد</span>
+        </a>
+        <a href="returns.html" class="nav-item">
+          <i class="bi bi-arrow-return-left"></i>
+          <span>مرجوعی‌ها</span>
+        </a>
+        <a href="reports.html" class="nav-item">
+          <i class="bi bi-bar-chart"></i>
+          <span>گزارش‌ها</span>
+        </a>
+          <a href="users.html" class="nav-item">
+          <i class="bi bi-person-gear"></i>
+          <span>کاربران سیستم</span>
+        </a>
+      </nav>
+
+      
+      <div class="sidebar-footer">
+  <div class="user-profile" id="userProfileBtn">
+    <div class="user-avatar">ا</div>
+    <div class="user-info">
+      <div class="name">مدیر سیستم</div>
+      <div class="role">ادمین</div>
+    </div>
+    <i class="bi bi-chevron-left user-arrow"></i>
+  </div>
+</div>
+
+
+<div class="user-modal-overlay" id="userModalOverlay">
+  <div class="user-modal">
+    <div class="user-modal-header">
+      <h3>پروفایل کاربر</h3>
+      <button class="modal-close" id="closeUserModal">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="user-modal-body">
+    
+      <div class="profile-view" id="profileView">
+        <div class="profile-avatar-large">ا</div>
+        <div class="profile-info">
+          <div class="profile-item">
+            <span class="label">نام و نام خانوادگی</span>
+            <span class="value" id="viewName">مدیر سیستم</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">نقش</span>
+            <span class="value" id="viewRole">ادمین</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">ایمیل</span>
+            <span class="value" id="viewEmail">admin@barezpakhsh.ir</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">شماره تماس</span>
+            <span class="value" id="viewPhone">۰۹۱۲۱۲۳۴۵۶۷</span>
+          </div>
+        </div>
+        <button class="btn-edit-profile" id="editProfileBtn">
+          <i class="bi bi-pencil-square"></i>
+          ویرایش اطلاعات
+        </button>
+      </div>
+
+      
+      <div class="profile-edit" id="profileEdit" style="display: none;">
+        <div class="form-group">
+          <label>نام و نام خانوادگی</label>
+          <input type="text" id="editName" value="مدیر سیستم">
+        </div>
+        <div class="form-group">
+          <label>نقش</label>
+          <input type="text" id="editRole" value="ادمین" disabled>
+        </div>
+        <div class="form-group">
+          <label>ایمیل</label>
+          <input type="email" id="editEmail" value="admin@barezpakhsh.ir">
+        </div>
+        <div class="form-group">
+          <label>شماره تماس</label>
+          <input type="text" id="editPhone" value="۰۹۱۲۱۲۳۴۵۶۷">
+        </div>
+        <div class="edit-actions">
+          <button class="btn-cancel" id="cancelEditBtn">انصراف</button>
+          <button class="btn-save" id="saveProfileBtn">ذخیره تغییرات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </aside>
+
+ 
+    <div class="main-content">
+ 
+      <header class="header">
+        <div class="header-right">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+              <i class="bi bi-list"></i>
+          </button>
+          <div class="header-title">
+            <h1>رانندگان</h1>
+            <p>مدیریت و مشاهده اطلاعات رانندگان</p>
+          </div>
+        </div>
+
+         <div class="header-left">
+  <button class="theme-toggle" id="themeToggle" type="button" title="تغییر تم">
+    <i class="bi bi-moon-stars" id="themeIcon"></i>
+  </button>
+
+  <!-- باکس اعلان -->
+  <div class="notification-box" id="notificationBox">
+    <button class="notification-btn" id="notificationBtn" type="button">
+      <i class="bi bi-bell"></i>
+      <span class="notification-badge" id="notificationBadge" style="display:none;">0</span>
+    </button>
+
+    <div class="notification-dropdown" id="notificationDropdown">
+      <div class="notification-header">
+        <h4>اعلان‌ها</h4>
+        <button class="mark-all-read" id="markAllRead" type="button">همه را خواندم</button>
+      </div>
+      <div class="notification-list" id="notificationList"></div>
+    </div>
+  </div>
+</div>
+      </header>
+
+    
+      <div class="page-content">
+
+        
+        <div class="page-toolbar">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="searchDriver" placeholder="جستجوی نام راننده یا پلاک...">
+          </div>
+
+          <div class="toolbar-filters">
+            <select id="filterStatus" class="form-control" style="width: 160px; height: 42px;">
+              <option value="">همه وضعیت‌ها</option>
+              <option value="active">فعال</option>
+              <option value="inactive">غیرفعال</option>
+            </select>
+
+            <button class="btn btn-primary" id="addDriverBtn">
+              <i class="bi bi-plus-lg"></i>
+              افزودن راننده
+            </button>
+          </div>
+        </div>
+
+       
+        <div class="drivers-grid" id="driversGrid">
+         
+        </div>
+
+       
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <i class="bi bi-people"></i>
+          <h3>راننده‌ای یافت نشد</h3>
+          <p>با تغییر فیلتر یا جستجو دوباره امتحان کنید</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+ 
+<button class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا" aria-label="بازگشت به بالا">
+  <i class="bi bi-arrow-up"></i>
+</button>
+        <script src="../js/main.js"></script>
+        <script src="../js/drivers.js"></script>
+<script>
+  
+
+
+    const userProfileBtn = document.getElementById('userProfileBtn');
+const userModalOverlay = document.getElementById('userModalOverlay');
+const closeUserModal = document.getElementById('closeUserModal');
+const editProfileBtn = document.getElementById('editProfileBtn');
+const profileView = document.getElementById('profileView');
+const profileEdit = document.getElementById('profileEdit');
+const cancelEditBtn = document.getElementById('cancelEditBtn');
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+
+userProfileBtn.addEventListener('click', () => {
+  userModalOverlay.classList.add('active');
+});
+
+
+function closeModal() {
+  userModalOverlay.classList.remove('active');
+  
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+}
+
+closeUserModal.addEventListener('click', closeModal);
+
+userModalOverlay.addEventListener('click', (e) => {
+  if (e.target === userModalOverlay) closeModal();
+});
+
+
+editProfileBtn.addEventListener('click', () => {
+  profileView.style.display = 'none';
+  profileEdit.style.display = 'block';
+});
+
+
+cancelEditBtn.addEventListener('click', () => {
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+});
+
+
+saveProfileBtn.addEventListener('click', () => {
+  const name = document.getElementById('editName').value;
+  const role = document.getElementById('editRole').value;
+  const email = document.getElementById('editEmail').value;
+  const phone = document.getElementById('editPhone').value;
+
+ 
+  document.getElementById('viewName').textContent = name;
+  document.getElementById('viewRole').textContent = role;
+  document.getElementById('viewEmail').textContent = email;
+  document.getElementById('viewPhone').textContent = phone;
+
+  
+  document.querySelector('.user-info .name').textContent = name;
+  document.querySelector('.user-info .role').textContent = role;
+
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+
+
+  alert('اطلاعات با موفقیت ذخیره شد');
+});
+
+
+
+
+
+
+
+const notificationBtn = document.getElementById('notificationBtn');
+const notificationDropdown = document.getElementById('notificationDropdown');
+const notificationBadge = document.getElementById('notificationBadge');
+const markAllRead = document.getElementById('markAllRead');
+
+
+notificationBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  notificationDropdown.classList.toggle('active');
+});
+
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.notification-box')) {
+    notificationDropdown.classList.remove('active');
+  }
+});
+
+
+markAllRead.addEventListener('click', () => {
+  document.querySelectorAll('.notification-item.unread').forEach(item => {
+    item.classList.remove('unread');
+  });
+  notificationBadge.textContent = '0';
+  notificationBadge.style.display = 'none';
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+
+.vehicles-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.v-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: var(--transition);
+}
+
+.v-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.v-stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.v-stat-icon.blue  { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+.v-stat-icon.green { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+.v-stat-icon.orange{ background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.v-stat-icon.red   { background: rgba(239, 68, 68, 0.12);  color: #ef4444; }
+
+.v-stat-info .value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.v-stat-info .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.search-box i {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  height: 42px;
+  padding: 0 40px 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.toolbar-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.table-card {
+  overflow: hidden; /* جلوگیری از بیرون زدن */
+    }
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  min-width: 900px; /* فقط جدول اسکرول بخوره، نه کل صفحه */
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.table th {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-body);
+}
+
+.insurance-badge,
+.vehicle-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.insurance-badge.valid    { background: rgba(16, 185, 129, 0.12); color: #059669; }
+.insurance-badge.expiring { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+.insurance-badge.expired  { background: rgba(239, 68, 68, 0.12);  color: #dc2626; }
+
+.vehicle-status.active   { background: rgba(16, 185, 129, 0.12); color: #059669; }
+.vehicle-status.inactive { background: rgba(100, 116, 139, 0.12); color: #64748b; }
+.vehicle-status.repair   { background: rgba(239, 68, 68, 0.12);  color: #dc2626; }
+
+.insurance-badge::before,
+.vehicle-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@media (max-width: 1200px) {
+  .vehicles-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vehicles-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .page-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .toolbar-filters {
+    width: 100%;
+  }
+
+  .toolbar-filters .form-control {
+    flex: 1;
+  }
+}

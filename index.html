@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>داشبورد | بارز پخش</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+
+<div class="loading-overlay" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-logo">
+      <i class="bi bi-truck"></i>
+    </div>
+    <div class="loader-text">
+      در حال بارگذاری
+      <span>.</span><span>.</span><span>.</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+  <div class="logo">
+
+    <img
+      class="logo__img logo__img--full"
+      src="assets/logo/barez-phakhsh-logi.png"
+      alt="بارز پخش"
+    >
+
+    <img
+      class="logo__img logo__img--mini"
+      src="assets/logo/mini-logo.png"
+      alt="بارز پخش"
+    >
+  </div>
+  <div class="sidebar-toggle" id="sidebarToggle">
+    <i class="bi bi-list"></i>
+  </div>
+</div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item active">
+          <i class="bi bi-grid-1x2"></i>
+          <span>داشبورد</span>
+        </a>
+        <a href="pages/daily-records.html" class="nav-item">
+          <i class="bi bi-calendar-check"></i>
+          <span>ثبت روزانه</span>
+        </a>
+        <a href="pages/drivers.html" class="nav-item">
+          <i class="bi bi-people"></i>
+          <span>رانندگان</span>
+        </a>
+        <a href="pages/vehicles.html" class="nav-item">
+          <i class="bi bi-truck"></i>
+          <span>خودروها</span>
+        </a>
+        <a href="pages/expenses.html" class="nav-item">
+          <i class="bi bi-wallet2"></i>
+          <span>هزینه‌ها</span>
+        </a>
+        <a href="pages/repairs.html" class="nav-item">
+          <i class="bi bi-tools"></i>
+          <span>تعمیرات</span>
+        </a>
+        <a href="pages/insurance.html" class="nav-item">
+          <i class="bi bi-shield-check"></i>
+          <span>بیمه</span>
+        </a>
+        <a href="pages/loans.html" class="nav-item">
+          <i class="bi bi-credit-card"></i>
+          <span>وام‌ها</span>
+        </a>
+        <a href="pages/payroll.html" class="nav-item">
+          <i class="bi bi-cash-stack"></i>
+          <span>حقوق و دستمزد</span>
+        </a>
+        <a href="pages/returns.html" class="nav-item">
+          <i class="bi bi-arrow-return-left"></i>
+          <span>مرجوعی‌ها</span>
+        </a>
+        <a href="pages/reports.html" class="nav-item">
+          <i class="bi bi-bar-chart"></i>
+          <span>گزارش‌ها</span>
+        </a>
+
+        <a href="pages/users.html" class="nav-item">
+  <i class="bi bi-person-gear"></i>
+  <span>کاربران سیستم</span>
+</a>
+      </nav>
+
+      <div class="sidebar-footer">
+  <div class="user-profile" id="userProfileBtn">
+    <div class="user-avatar">ا</div>
+    <div class="user-info">
+      <div class="name">مدیر سیستم</div>
+      <div class="role">ادمین</div>
+    </div>
+    <i class="bi bi-chevron-left user-arrow"></i>
+  </div>
+</div>
+
+<div class="user-modal-overlay" id="userModalOverlay">
+  <div class="user-modal">
+    <div class="user-modal-header">
+      <h3>پروفایل کاربر</h3>
+      <button class="modal-close" id="closeUserModal">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="user-modal-body">
+
+      <div class="profile-view" id="profileView">
+        <div class="profile-avatar-large">ا</div>
+        <div class="profile-info">
+          <div class="profile-item">
+            <span class="label">نام و نام خانوادگی</span>
+            <span class="value" id="viewName">مدیر سیستم</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">نقش</span>
+            <span class="value" id="viewRole">ادمین</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">ایمیل</span>
+            <span class="value" id="viewEmail">admin@barezpakhsh.ir</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">شماره تماس</span>
+            <span class="value" id="viewPhone">۰۹۱۲۱۲۳۴۵۶۷</span>
+          </div>
+        </div>
+        <button class="btn-edit-profile" id="editProfileBtn">
+          <i class="bi bi-pencil-square"></i>
+          ویرایش اطلاعات
+        </button>
+      </div>
+      <div class="profile-edit" id="profileEdit" style="display: none;">
+        <div class="form-group">
+          <label>نام و نام خانوادگی</label>
+          <input type="text" id="editName" value="مدیر سیستم">
+        </div>
+        <div class="form-group">
+          <label>نقش</label>
+          <input type="text" id="editRole" value="ادمین" disabled>
+        </div>
+        <div class="form-group">
+          <label>ایمیل</label>
+          <input type="email" id="editEmail" value="admin@barezpakhsh.ir">
+        </div>
+        <div class="form-group">
+          <label>شماره تماس</label>
+          <input type="text" id="editPhone" value="۰۹۱۲۱۲۳۴۵۶۷">
+        </div>
+        <div class="edit-actions">
+          <button class="btn-cancel" id="cancelEditBtn">انصراف</button>
+          <button class="btn-save" id="saveProfileBtn">ذخیره تغییرات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </aside>
+
+    <div class="main-content">
+
+      <header class="header">
+        <div class="header-right">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+              <i class="bi bi-list"></i>
+          </button>
+          <div class="header-title">
+            <h1>داشبورد</h1>
+            <p>خلاصه وضعیت سامانه بارز پخش</p>
+          </div>
+        </div>
+
+        <div class="header-left">
+          <button class="theme-toggle" id="themeToggle" title="تغییر تم">
+            <i class="bi bi-moon-stars" id="themeIcon"></i>
+          </button>
+
+                    <div class="notification-box" id="notificationBox">
+              <button class="notification-btn" id="notificationBtn" type="button">
+                <i class="bi bi-bell"></i>
+                <span class="notification-badge" id="notificationBadge" style="display:none;">0</span>
+              </button>
+              <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                  <h4>اعلان‌ها</h4>
+                  <button class="mark-all-read" id="markAllRead" type="button">همه را خواندم</button>
+                </div>
+                <div class="notification-list" id="notificationList"></div>
+              </div>
+           </div>
+       </div>
+    </header>
+
+      <div class="page-content">
+        <section class="dash-hero">
+    <div class="dash-hero-glow"></div>
+
+    <div class="dash-hero-text">
+      <span class="dash-hero-badge">
+        <i class="bi bi-truck"></i>
+        سامانه مدیریت بارز پخش
+      </span>
+      <h2>همه‌چیز ناوگان در یک نگاه</h2>
+      <p>
+        پخش روزانه، راننده‌ها، خودروها و گزارش‌های مالی را
+        از همین داشبورد مدیریت کنید.
+      </p>
+      <div class="dash-hero-actions">
+        <a href="pages/daily-records.html" class="btn btn-primary">
+          <i class="bi bi-plus-lg"></i>
+          ثبت عملیات امروز
+        </a>
+        <a href="pages/reports.html" class="btn btn-secondary">
+          <i class="bi bi-bar-chart"></i>
+          مشاهده گزارش‌ها
+        </a>
+      </div>
+    </div>
+
+    <div class="dash-hero-art">
+      <img src="assets/image/baraz-pakhsh-warehouse-en-4.png" alt="بارز پخش">
+    </div>
+  </section>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+            <div class="stat-label">رانندگان فعال</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change up">
+              <i class="bi bi-arrow-up"></i>
+              ۲ نفر نسبت به ماه قبل
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-truck"></i></div>
+            <div class="stat-label">خودروهای فعال</div>
+            <div class="stat-value">18</div>
+            <div class="stat-change up">
+              <i class="bi bi-arrow-up"></i>
+              ۱ دستگاه جدید
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+            <div class="stat-label">پخش امروز</div>
+            <div class="stat-value">18</div>
+            <div class="stat-change up">
+              <i class="bi bi-arrow-up"></i>
+              ۶٪ نسبت به دیروز
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-person-check"></i></div>
+            <div class="stat-label">مشتریان امروز</div>
+            <div class="stat-value">42</div>
+            <div class="stat-change up">
+              <i class="bi bi-arrow-up"></i>
+              ۸٪ نسبت به دیروز
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-geo-alt"></i></div>
+            <div class="stat-label">مسافت طی‌شده</div>
+            <div class="stat-value">۱,۲۴۰</div>
+            <div class="stat-change up">
+              <i class="bi bi-arrow-up"></i>
+              کیلومتر امروز
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-cash"></i></div>
+            <div class="stat-label">هزینه این ماه</div>
+            <div class="stat-value">۸۶.۵</div>
+            <div class="stat-change down">
+              <i class="bi bi-arrow-down"></i>
+              میلیون تومان
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">نمودار تعداد پخش ماهانه</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="distributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">نمودار هزینه‌ها</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="expenseChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid-3">
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">آخرین پخش‌ها</h3>
+              <a href="#" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">مشاهده همه</a>
+            </div>
+            <div class="card-body" style="padding-top: 8px;">
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-box-seam"></i></div>
+                  <div class="list-item-text">
+                    <h4>پخش منطقه ۲</h4>
+                    <p>راننده: علی محمدی</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">تکمیل</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-box-seam"></i></div>
+                  <div class="list-item-text">
+                    <h4>پخش منطقه ۵</h4>
+                    <p>راننده: رضا کریمی</p>
+                  </div>
+                </div>
+                <span class="badge badge-warning">در حال انجام</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-box-seam"></i></div>
+                  <div class="list-item-text">
+                    <h4>پخش منطقه ۱</h4>
+                    <p>راننده: حسین رضایی</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">تکمیل</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">آخرین تعمیرات</h3>
+              <a href="pages/repairs.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">مشاهده همه</a>
+            </div>
+            <div class="card-body" style="padding-top: 8px;">
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-tools"></i></div>
+                  <div class="list-item-text">
+                    <h4>تعویض روغن</h4>
+                    <p>پراید - ۱۲۳ ب ۴۵</p>
+                  </div>
+                </div>
+                <span class="badge badge-info">۲ روز پیش</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-tools"></i></div>
+                  <div class="list-item-text">
+                    <h4>تعمیر ترمز</h4>
+                    <p>پژو - ۷۸۹ الف ۱۲</p>
+                  </div>
+                </div>
+                <span class="badge badge-warning">در حال انجام</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-tools"></i></div>
+                  <div class="list-item-text">
+                    <h4>تعویض لاستیک</h4>
+                    <p>وانت - ۴۵۶ ج ۷۸</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">انجام شد</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">بیمه‌های نزدیک به انقضا</h3>
+              <a href="pages/insurance.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">مشاهده همه</a>
+            </div>
+            <div class="card-body" style="padding-top: 8px;">
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-shield-exclamation"></i></div>
+                  <div class="list-item-text">
+                    <h4>بیمه شخص ثالث</h4>
+                    <p>پراید - ۱۲۳ ب ۴۵</p>
+                  </div>
+                </div>
+                <span class="badge badge-danger">۱۲ روز</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-shield-exclamation"></i></div>
+                  <div class="list-item-text">
+                    <h4>بیمه بدنه</h4>
+                    <p>پژو - ۷۸۹ الف ۱۲</p>
+                  </div>
+                </div>
+                <span class="badge badge-warning">۲۸ روز</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-shield-check"></i></div>
+                  <div class="list-item-text">
+                    <h4>بیمه شخص ثالث</h4>
+                    <p>وانت - ۴۵۶ ج ۷۸</p>
+                  </div>
+                </div>
+                <span class="badge badge-info">۴۵ روز</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid" style="margin-top: 24px;">
+    
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">اقساط وام نزدیک</h3>
+              <a href="pages/loans.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">مشاهده همه</a>
+            </div>
+            <div class="card-body" style="padding-top: 8px;">
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-credit-card"></i></div>
+                  <div class="list-item-text">
+                    <h4>قسط خودرو پژو</h4>
+                    <p>مبلغ: ۱۲,۵۰۰,۰۰۰ تومان</p>
+                  </div>
+                </div>
+                <span class="badge badge-danger">۵ روز دیگر</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-credit-card"></i></div>
+                  <div class="list-item-text">
+                    <h4>قسط وانت</h4>
+                    <p>مبلغ: ۸,۲۰۰,۰۰۰ تومان</p>
+                  </div>
+                </div>
+                <span class="badge badge-warning">۱۸ روز دیگر</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">آخرین خودروهای استفاده‌شده</h3>
+              <a href="pages/vehicles.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">مشاهده همه</a>
+            </div>
+            <div class="card-body" style="padding-top: 8px;">
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-truck"></i></div>
+                  <div class="list-item-text">
+                    <h4>پراید ۱۲۳ ب ۴۵</h4>
+                    <p>راننده: علی محمدی • ۱۴۲ کیلومتر</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">فعال</span>
+              </div>
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-icon"><i class="bi bi-truck"></i></div>
+                  <div class="list-item-text">
+                    <h4>پژو ۷۸۹ الف ۱۲</h4>
+                    <p>راننده: رضا کریمی • ۹۸ کیلومتر</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">فعال</span>
+              </div>
+            </div>
+          </div>
+        </div>
+<section class="dash-hero">
+   <div class="dash-hero-art">
+      <img src="assets/image/auto_inventory.png" alt="بارز پخش">
+    </div>
+    <div class="dash-hero-glow"></div>
+
+    <div class="dash-hero-text">
+      <span class="dash-hero-badge">
+        <i class="bi bi-truck"></i>
+        سامانه مدیریت بارز پخش
+      </span>
+      <h2>همه‌چیز ناوگان در یک نگاه</h2>
+      <p>برای
+       مدیریت بیمه‌ها و معاینه فنی خودروها
+      </p>
+      <div class="dash-hero-actions">
+        <a href="../barez-pakhsh/pages/expenses.html" class="btn btn-primary">
+          <i class="bi bi-plus-lg"></i>
+          حقوق و دستمزد
+        </a>
+        <a href="pages/reports.html" class="btn btn-secondary">
+          <i class="bi bi-shield-check"></i>
+          بیمه و معاینه فنی 
+        </a>
+      </div>
+    </div>
+
+   
+  </section>
+      </div>
+
+    </div>
+    
+  </div>
+
+<button class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا" aria-label="بازگشت به بالا">
+  <i class="bi bi-arrow-up"></i>
+</button>
+<script src="js/main.js"></script>
+  <script>
+
+    const distCtx = document.getElementById('distributionChart').getContext('2d');
+    new Chart(distCtx, {
+      type: 'line',
+      data: {
+        labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+        datasets: [{
+          label: 'تعداد پخش',
+          data: [120, 145, 132, 168, 190, 210],
+          borderColor: '#e11d48',
+          backgroundColor: 'rgba(225, 29, 72, 0.08)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#e11d48',
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(0,0,0,0.04)' }
+          },
+          x: {
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    const expCtx = document.getElementById('expenseChart').getContext('2d');
+    new Chart(expCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['سوخت', 'تعمیرات', 'بیمه', 'سایر'],
+        datasets: [{
+          data: [45, 25, 15, 15],
+          backgroundColor: ['#e11d48', '#fb7185', '#fda4af', '#fecdd3'],
+          borderWidth: 0,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 16,
+              usePointStyle: true
+            }
+          }
+        },
+        cutout: '70%'
+      }
+    });
+
+
+
+
+
+    const userProfileBtn = document.getElementById('userProfileBtn');
+const userModalOverlay = document.getElementById('userModalOverlay');
+const closeUserModal = document.getElementById('closeUserModal');
+const editProfileBtn = document.getElementById('editProfileBtn');
+const profileView = document.getElementById('profileView');
+const profileEdit = document.getElementById('profileEdit');
+const cancelEditBtn = document.getElementById('cancelEditBtn');
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+userProfileBtn.addEventListener('click', () => {
+  userModalOverlay.classList.add('active');
+});
+
+function closeModal() {
+  userModalOverlay.classList.remove('active');
+
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+}
+
+closeUserModal.addEventListener('click', closeModal);
+
+userModalOverlay.addEventListener('click', (e) => {
+  if (e.target === userModalOverlay) closeModal();
+});
+
+
+editProfileBtn.addEventListener('click', () => {
+  profileView.style.display = 'none';
+  profileEdit.style.display = 'block';
+});
+
+
+cancelEditBtn.addEventListener('click', () => {
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+});
+
+saveProfileBtn.addEventListener('click', () => {
+  const name = document.getElementById('editName').value;
+  const role = document.getElementById('editRole').value;
+  const email = document.getElementById('editEmail').value;
+  const phone = document.getElementById('editPhone').value;
+
+  document.getElementById('viewName').textContent = name;
+  document.getElementById('viewRole').textContent = role;
+  document.getElementById('viewEmail').textContent = email;
+  document.getElementById('viewPhone').textContent = phone;
+
+  document.querySelector('.user-info .name').textContent = name;
+  document.querySelector('.user-info .role').textContent = role;
+
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+
+  alert('اطلاعات با موفقیت ذخیره شد');
+});
+
+
+
+
+
+
+const notificationBtn = document.getElementById('notificationBtn');
+const notificationDropdown = document.getElementById('notificationDropdown');
+const notificationBadge = document.getElementById('notificationBadge');
+const markAllRead = document.getElementById('markAllRead');
+
+notificationBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  notificationDropdown.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.notification-box')) {
+    notificationDropdown.classList.remove('active');
+  }
+});
+
+markAllRead.addEventListener('click', () => {
+  document.querySelectorAll('.notification-item.unread').forEach(item => {
+    item.classList.remove('unread');
+  });
+  notificationBadge.textContent = '0';
+  notificationBadge.style.display = 'none';
+});
+
+  </script>
+</body>
+</html>

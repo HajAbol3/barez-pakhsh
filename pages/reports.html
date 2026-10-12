@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مرکز گزارشات | بارز پخش</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/reports.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <div class="loading-overlay" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-logo"><i class="bi bi-truck"></i></div>
+      <div class="loader-text">در حال بارگذاری<span>.</span><span>.</span><span>.</span></div>
+    </div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app">
+
+    <aside class="sidebar">
+     <div class="sidebar-header">
+  <div class="logo">
+
+    <img
+      class="logo__img logo__img--full"
+      src="../assets/logo/barez-phakhsh-logi.png"
+      alt="بارز پخش"
+    >
+
+    <img
+      class="logo__img logo__img--mini"
+      src="../assets/logo/mini-logo.png"
+      alt="بارز پخش"
+    >
+  </div>
+  <div class="sidebar-toggle" id="sidebarToggle">
+    <i class="bi bi-list"></i>
+  </div>
+</div>
+
+      <nav class="sidebar-nav">
+        <a href="../index.html" class="nav-item"><i class="bi bi-grid-1x2"></i><span>داشبورد</span></a>
+        <a href="daily-records.html" class="nav-item"><i class="bi bi-calendar-check"></i><span>ثبت روزانه</span></a>
+        <a href="drivers.html" class="nav-item"><i class="bi bi-people"></i><span>رانندگان</span></a>
+        <a href="vehicles.html" class="nav-item"><i class="bi bi-truck"></i><span>خودروها</span></a>
+        <a href="expenses.html" class="nav-item"><i class="bi bi-wallet2"></i><span>هزینه‌ها</span></a>
+        <a href="repairs.html" class="nav-item"><i class="bi bi-tools"></i><span>تعمیرات</span></a>
+        <a href="insurance.html" class="nav-item"><i class="bi bi-shield-check"></i><span>بیمه</span></a>
+        <a href="loans.html" class="nav-item"><i class="bi bi-credit-card"></i><span>وام‌ها</span></a>
+        <a href="payroll.html" class="nav-item"><i class="bi bi-cash-stack"></i><span>حقوق و دستمزد</span></a>
+        <a href="returns.html" class="nav-item"><i class="bi bi-arrow-return-left"></i><span>مرجوعی‌ها</span></a>
+        <a href="reports.html" class="nav-item active"><i class="bi bi-bar-chart"></i><span>گزارش‌ها</span></a>
+                <a href="users.html" class="nav-item">
+  <i class="bi bi-person-gear"></i>
+  <span>کاربران سیستم</span>
+</a>
+      </nav>
+
+    
+      <div class="sidebar-footer">
+  <div class="user-profile" id="userProfileBtn">
+    <div class="user-avatar">ا</div>
+    <div class="user-info">
+      <div class="name">مدیر سیستم</div>
+      <div class="role">ادمین</div>
+    </div>
+    <i class="bi bi-chevron-left user-arrow"></i>
+  </div>
+</div>
+
+<div class="user-modal-overlay" id="userModalOverlay">
+  <div class="user-modal">
+    <div class="user-modal-header">
+      <h3>پروفایل کاربر</h3>
+      <button class="modal-close" id="closeUserModal">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="user-modal-body">
+
+      <div class="profile-view" id="profileView">
+        <div class="profile-avatar-large">ا</div>
+        <div class="profile-info">
+          <div class="profile-item">
+            <span class="label">نام و نام خانوادگی</span>
+            <span class="value" id="viewName">مدیر سیستم</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">نقش</span>
+            <span class="value" id="viewRole">ادمین</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">ایمیل</span>
+            <span class="value" id="viewEmail">admin@barezpakhsh.ir</span>
+          </div>
+          <div class="profile-item">
+            <span class="label">شماره تماس</span>
+            <span class="value" id="viewPhone">۰۹۱۲۱۲۳۴۵۶۷</span>
+          </div>
+        </div>
+        <button class="btn-edit-profile" id="editProfileBtn">
+          <i class="bi bi-pencil-square"></i>
+          ویرایش اطلاعات
+        </button>
+      </div>
+
+      <div class="profile-edit" id="profileEdit" style="display: none;">
+        <div class="form-group">
+          <label>نام و نام خانوادگی</label>
+          <input type="text" id="editName" value="مدیر سیستم">
+        </div>
+        <div class="form-group">
+          <label>نقش</label>
+          <input type="text" id="editRole" value="ادمین" disabled>
+        </div>
+        <div class="form-group">
+          <label>ایمیل</label>
+          <input type="email" id="editEmail" value="admin@barezpakhsh.ir">
+        </div>
+        <div class="form-group">
+          <label>شماره تماس</label>
+          <input type="text" id="editPhone" value="۰۹۱۲۱۲۳۴۵۶۷">
+        </div>
+        <div class="edit-actions">
+          <button class="btn-cancel" id="cancelEditBtn">انصراف</button>
+          <button class="btn-save" id="saveProfileBtn">ذخیره تغییرات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div class="header-right">
+          <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="bi bi-list"></i></button>
+          <div class="header-title">
+            <h1>مرکز گزارشات</h1>
+            <p>دسترسی سریع به تمام گزارش‌های سیستم</p>
+          </div>
+        </div>
+
+           <div class="header-left">
+  <button class="theme-toggle" id="themeToggle" type="button" title="تغییر تم">
+    <i class="bi bi-moon-stars" id="themeIcon"></i>
+  </button>
+
+  <!-- باکس اعلان -->
+  <div class="notification-box" id="notificationBox">
+    <button class="notification-btn" id="notificationBtn" type="button">
+      <i class="bi bi-bell"></i>
+      <span class="notification-badge" id="notificationBadge" style="display:none;">0</span>
+    </button>
+
+    <div class="notification-dropdown" id="notificationDropdown">
+      <div class="notification-header">
+        <h4>اعلان‌ها</h4>
+        <button class="mark-all-read" id="markAllRead" type="button">همه را خواندم</button>
+      </div>
+      <div class="notification-list" id="notificationList"></div>
+    </div>
+  </div>
+</div>
+      </header>
+
+      <div class="page-content">
+
+        <div class="reports-filter">
+          <div class="filter-group">
+            <label>سال</label>
+            <select id="filterYear" class="form-control">
+              <option value="1405" selected>۱۴۰۵</option>
+              <option value="1404">۱۴۰۴</option>
+              <option value="1403">۱۴۰۳</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>ماه</label>
+            <select id="filterMonth" class="form-control">
+              <option value="">همه ماه‌ها</option>
+              <option value="01">فروردین</option>
+              <option value="02">اردیبهشت</option>
+              <option value="03">خرداد</option>
+              <option value="04">تیر</option>
+              <option value="05">مرداد</option>
+              <option value="06" selected>شهریور</option>
+              <option value="07">مهر</option>
+              <option value="08">آبان</option>
+              <option value="09">آذر</option>
+              <option value="10">دی</option>
+              <option value="11">بهمن</option>
+              <option value="12">اسفند</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>راننده</label>
+            <select id="filterDriver" class="form-control">
+              <option value="">همه رانندگان</option>
+              <option value="ابوذر دهقان اناری">ابوذر دهقان اناری</option>
+              <option value="علی محمدی">علی محمدی</option>
+              <option value="رضا کریمی">رضا کریمی</option>
+              <option value="حسین رضایی">حسین رضایی</option>
+              <option value="سعید نوری">سعید نوری</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>خودرو</label>
+            <select id="filterVehicle" class="form-control">
+              <option value="">همه خودروها</option>
+              <option value="۶۵ ایران ۴۶۳ ع ۹۶">۶۵ ایران ۴۶۳ ع ۹۶</option>
+              <option value="۱۲۳ ب ۴۵">۱۲۳ ب ۴۵</option>
+              <option value="۷۸۹ الف ۱۲">۷۸۹ الف ۱۲</option>
+              <option value="۴۵۶ ج ۷۸">۴۵۶ ج ۷۸</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>مسیر</label>
+            <select id="filterRoute" class="form-control">
+              <option value="">همه مسیرها</option>
+              <option value="منطقه ۱">منطقه ۱</option>
+              <option value="منطقه ۲">منطقه ۲</option>
+              <option value="منطقه ۳">منطقه ۳</option>
+              <option value="منطقه ۴">منطقه ۴</option>
+              <option value="منطقه ۵">منطقه ۵</option>
+              <option value="حومه">حومه</option>
+            </select>
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn btn-primary" id="applyFilters">
+              <i class="bi bi-funnel"></i>
+              اعمال فیلتر
+            </button>
+            <button class="btn btn-secondary" id="resetFilters">
+              <i class="bi bi-arrow-clockwise"></i>
+              پاک کردن
+            </button>
+          </div>
+        </div>
+
+        <div class="reports-grid" id="reportsGrid">
+
+          <div class="report-card" data-report="daily">
+            <div class="report-icon ">
+                              <img class="report-logo" src="../assets/image/daily-report.svg" alt=".">
+            </div>
+            <div class="report-content">
+              <h3>گزارش روزانه</h3>
+              <p>خلاصه عملیات پخش روزانه بر اساس فیلترها</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('daily')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="drivers">
+            <div class="report-icon ">
+                              <img class="report-logo" src="../assets/image/driver_report.svg" alt=".">
+
+                            </div>
+                            <div class="report-content">
+              <h3>گزارش رانندگان</h3>
+              <p>عملکرد، مسافت و آمار هر راننده</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('drivers')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+          
+          <div class="report-card" data-report="vehicles">
+            <div class="report-icon purple">
+              <img class="report-logo" src="../assets/image/vehicle_report.svg" alt=".">
+            </div>
+            <div class="report-content">
+              <h3>گزارش خودروها</h3>
+              <p>وضعیت ناوگان، مسافت و تعمیرات</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('vehicles')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="repairs">
+            <div class="report-icon orange">
+                              <img class="report-logo" src="../assets/image/repair-report.svg" alt=".">
+            </div>
+            <div class="report-content">
+          
+              <h3>گزارش تعمیرات</h3>
+              <p>هزینه‌ها، قطعات و تعمیرکاران</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('repairs')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="finance">
+            <div class="report-icon red">
+                           <img class="report-logo" src="../assets/image/finance_report.svg" alt=".">
+
+            </div>
+            <div class="report-content">
+              <h3>گزارش مالی</h3>
+              <p>هزینه‌ها، پرداختی‌ها و بدهی‌ها</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('finance')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="payroll">
+            <div class="report-icon teal">
+                              <img class="report-logo" src="../assets/image/salary_report.svg" alt=".">
+
+            </div>
+            <div class="report-content">
+              <h3>گزارش حقوق</h3>
+              <p>حقوق، پورسانت و کسورات رانندگان</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('payroll')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="loans">
+            <div class="report-icon indigo">
+                              <img class="report-logo" src="../assets/image/loan_report.svg" alt=".">
+
+            </div>
+            <div class="report-content">
+              <h3>گزارش وام</h3>
+              <p>وام‌های شرکتی و شخصی و مانده‌ها</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('loans')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+          <div class="report-card" data-report="returns">
+            <div class="report-icon pink">
+                              <img class="report-logo" src="../assets/image/returned_report.svg" alt=".">
+
+            </div>
+            <div class="report-content">
+              <h3>گزارش برگشتی</h3>
+              <p>کالاهای برگشتی، هزینه و دلایل</p>
+            </div>
+            <button class="btn-report" onclick="generateReport('returns')">
+              <i class="bi bi-file-earmark-text"></i>
+              مشاهده گزارش
+            </button>
+          </div>
+
+        </div>
+
+        <div class="report-result" id="reportResult" style="display: none;">
+          <div class="result-header">
+            <h3 id="resultTitle">نتیجه گزارش</h3>
+            <div class="result-actions">
+              <button class="btn btn-secondary" id="printReport">
+                <i class="bi bi-printer"></i>
+                چاپ
+              </button>
+              <button class="btn btn-secondary" id="exportReport">
+                <i class="bi bi-download"></i>
+                خروجی Excel
+              </button>
+              <button class="btn btn-secondary" id="closeResult">
+                <i class="bi bi-x-lg"></i>
+                بستن
+              </button>
+            </div>
+          </div>
+          <div class="result-body" id="resultBody">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<button class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا" aria-label="بازگشت به بالا">
+  <i class="bi bi-arrow-up"></i>
+</button>
+  <script src="../js/main.js"></script>
+  <script src="../js/reports.js"></script>
+  <script>
+    
+    const userProfileBtn = document.getElementById('userProfileBtn');
+const userModalOverlay = document.getElementById('userModalOverlay');
+const closeUserModal = document.getElementById('closeUserModal');
+const editProfileBtn = document.getElementById('editProfileBtn');
+const profileView = document.getElementById('profileView');
+const profileEdit = document.getElementById('profileEdit');
+const cancelEditBtn = document.getElementById('cancelEditBtn');
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+userProfileBtn.addEventListener('click', () => {
+  userModalOverlay.classList.add('active');
+});
+
+function closeModal() {
+  userModalOverlay.classList.remove('active');
+
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+}
+
+closeUserModal.addEventListener('click', closeModal);
+
+userModalOverlay.addEventListener('click', (e) => {
+  if (e.target === userModalOverlay) closeModal();
+});
+
+editProfileBtn.addEventListener('click', () => {
+  profileView.style.display = 'none';
+  profileEdit.style.display = 'block';
+});
+
+cancelEditBtn.addEventListener('click', () => {
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+});
+
+
+saveProfileBtn.addEventListener('click', () => {
+  const name = document.getElementById('editName').value;
+  const role = document.getElementById('editRole').value;
+  const email = document.getElementById('editEmail').value;
+  const phone = document.getElementById('editPhone').value;
+
+
+  document.getElementById('viewName').textContent = name;
+  document.getElementById('viewRole').textContent = role;
+  document.getElementById('viewEmail').textContent = email;
+  document.getElementById('viewPhone').textContent = phone;
+
+  document.querySelector('.user-info .name').textContent = name;
+  document.querySelector('.user-info .role').textContent = role;
+
+  profileView.style.display = 'block';
+  profileEdit.style.display = 'none';
+
+  alert('اطلاعات با موفقیت ذخیره شد');
+});
+
+
+
+const notificationBtn = document.getElementById('notificationBtn');
+const notificationDropdown = document.getElementById('notificationDropdown');
+const notificationBadge = document.getElementById('notificationBadge');
+const markAllRead = document.getElementById('markAllRead');
+
+notificationBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  notificationDropdown.classList.toggle('active');
+});
+
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.notification-box')) {
+    notificationDropdown.classList.remove('active');
+  }
+});
+
+
+markAllRead.addEventListener('click', () => {
+  document.querySelectorAll('.notification-item.unread').forEach(item => {
+    item.classList.remove('unread');
+  });
+  notificationBadge.textContent = '0';
+  notificationBadge.style.display = 'none';
+});
+
+  </script>
+</body>
+</html>

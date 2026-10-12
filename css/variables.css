@@ -1,0 +1,86 @@
+:root {
+  /* ===== Primary Colors ===== */
+  --primary: #e11d48;
+  --primary-hover: #be123c;
+  --primary-light: #fff1f2;
+  --primary-soft: rgba(225, 29, 72, 0.08);
+--primary--white-sidebar:#fff;
+  /* ===== Navy (very limited use) ===== */
+  --navy: #0f172a;
+  --navy-soft: #1e293b;
+
+  /* ===== Neutrals - Light Mode ===== */
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.85);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+
+  /* ===== Shadows & Effects ===== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --shadow-primary: 0 8px 24px rgba(225, 29, 72, 0.18);
+
+  /* ===== Glass ===== */
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+
+  /* ===== Radius ===== */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+
+  /* ===== Transitions ===== */
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s ease;
+  --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== Sidebar ===== */
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 80px;
+
+  /* ===== Header ===== */
+  --header-height: 70px;
+}
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] {
+  --primary: #f43f5e;
+  --primary-hover: #e11d48;
+  --primary-light: rgba(244, 63, 94, 0.12);
+  --primary-soft: rgba(244, 63, 94, 0.1);
+
+  --navy: #e2e8f0;
+  --navy-soft: #cbd5e1;
+
+  --bg-body: #0b1120;
+  --bg-card: #111827;
+  --bg-sidebar: #0f172a;
+  --bg-header: rgba(15, 23, 42, 0.85);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --border: #1e293b;
+  --border-light: #1e293b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-primary: 0 8px 24px rgba(244, 63, 94, 0.25);
+
+  --glass: rgba(17, 24, 39, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.06);
+}

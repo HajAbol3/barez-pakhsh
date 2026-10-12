@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورود | بارز پخش</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <div class="login-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card" id="loginCard">
+      <div class="login-brand">
+            <div class="logo">
+
+    <img
+      class="logo__img--login"
+      src="assets/logo/barez-phakhsh-logi.png"
+      alt="بارز پخش"
+    >
+        <p style="margin-bottom: 20px;">سامانه مدیریت ناوگان و پخش</p>
+      </div>
+
+      <form class="login-form" id="loginForm" autocomplete="on">
+        <div class="field" id="fieldUser">
+          <label for="username">نام کاربری</label>
+          <div class="input-wrap">
+            <i class="bi bi-person input-icon"></i>
+            <input type="text" id="username" name="username" placeholder=" " required>
+            <span class="focus-line"></span>
+          </div>
+        </div>
+
+        <div class="field" id="fieldPass">
+          <label for="password">رمز عبور</label>
+          <div class="input-wrap">
+            <i class="bi bi-lock input-icon"></i>
+            <input type="password" id="password" name="password" placeholder=" " required>
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="نمایش رمز">
+              <i class="bi bi-eye" id="passIcon"></i>
+            </button>
+            <span class="focus-line"></span>
+          </div>
+        </div>
+
+        <div class="form-meta">
+          <label class="remember">
+            <input type="checkbox" id="remember">
+            <span>مرا به خاطر بسپار</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text">ورود به سامانه</span>
+          <span class="btn-loader" hidden>
+            <i class="bi bi-arrow-repeat spin"></i>
+          </span>
+        </button>
+
+        <p class="login-error" id="loginError" hidden></p>
+      </form>
+
+      <div class="login-footer">
+        <span>© بارز پخش</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
